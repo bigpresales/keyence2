@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyence Datamatrix by Smooth Print</title>
+    <style>
+        body {
+            background: url('office.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+        }
+        .input-group {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .input-group input {
+            display: block;
+            width: 95%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #1965E1;
+            color: white;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Brother Solutions</h1>
+        <h2>Datamatrix by Smooth Print</h2>
+
+        <div class="input-group">
+            <label for="text_text1">Artikelnummer</label>
+            <input type="text" id="text_text1" required>
+        </div>
+
+
+        <div class="input-group">
+            <label for="copies">Number of copies</label>
+            <input type="text" id="copies" required>
+        </div>
+        
+       <button onclick="sendToPrint()">Send to Print</button>
+        <div class="button-group">
+            <button onclick="downloadTemplate()">Download Template</button>
+            <button onclick="window.location.href='https://apps.apple.com/us/app/smooth-print/id1629559918'">Smooth Print for iOS</button>
+            <button onclick="window.location.href='https://support.brother.com/g/b/agreement.aspx?dlid=dlfp101087_000&c=eu_ot&lang=en'">Smooth Print for Android</button>
+        </div>
+    </div>
+
+
+<script>
+    function formatDate(date) {
+        let day = String(date.getDate()).padStart(2, '0');
+        let month = String(date.getMonth() + 1).padStart(2, '0');
+        let year = date.getFullYear();
+        return `${day}.${month}.${year}`;
+    }
+
+ 
+    function sendToPrint() {
+        const text1 = document.getElementById('text_text1').value;
+        const copies = document.getElementById('copies').value;
+
+
+        // Construct barcode_datamatrix from the inputs
+        const barcode_datamatrix = `${text1}`;
+
+        // Generate the URL while keeping all fields
+        const url = `brotherwebprint://print?filename=keyence_rj4250.lbx&size=102x76mm.bin&text_text1=${text1}&barcode_datamatrix=${barcode_datamatrix}&copies=${copies}`;
+
+        window.open(url, '_blank');
+    }
+            function downloadTemplate() {
+            const link = document.createElement('a');
+            link.href = 'https://github.com/bigpresales/keyence2/raw/refs/heads/main/files_keyence.zip'; // 
+            link.download = 'files_keyence2.zip';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+</script>
+</body>
+</html>
